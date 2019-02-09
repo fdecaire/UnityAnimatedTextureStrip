@@ -1,15 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    private int frameCounter = 0;
+    private int _frameCounter;
     private Material _doorMaterial;
-    private bool CloseOpen = false; // false == open
-    private int TilesX = 13;
+    private bool _closeOpen; // false == open
+    private int TotalTilesInStrip = 13;
 
-    // Start is called before the first frame update
     void Start()
     {
         float size = 1f;
@@ -29,14 +27,14 @@ public class Main : MonoBehaviour
             new Vector2(1, 1),
             new Vector2(1, 0),
         };
-        AddWall("door13_strip", vertices0, uvs0);
 
+        AddWall("door13_strip", vertices0, uvs0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _doorMaterial.mainTextureScale = new Vector2(1.0f / TilesX, 1.0f / 1);
+        _doorMaterial.mainTextureScale = new Vector2(1.0f / TotalTilesInStrip, 1.0f / 1);
         StartCoroutine("PlayLoop", 0.10f);
     }
 
@@ -44,26 +42,26 @@ public class Main : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (CloseOpen && frameCounter == 0)
+        if (_closeOpen && _frameCounter == 0)
         {
-            CloseOpen = !CloseOpen;
+            _closeOpen = !_closeOpen;
         }
 
-        if (!CloseOpen && frameCounter == TilesX - 1)
+        if (!_closeOpen && _frameCounter == TotalTilesInStrip - 1)
         {
-            CloseOpen = !CloseOpen;
+            _closeOpen = !_closeOpen;
         }
 
-        if (CloseOpen)
+        if (_closeOpen)
         {
-            frameCounter--;
+            _frameCounter--;
         }
         else
         {
-            frameCounter++;
+            _frameCounter++;
         }
 
-        _doorMaterial.mainTextureOffset = new Vector2(1.0f / TilesX * frameCounter, 1.0f / 1);
+        _doorMaterial.mainTextureOffset = new Vector2(1.0f / TotalTilesInStrip * _frameCounter, 1.0f / 1);
         
         StopCoroutine("PlayLoop");
     }
