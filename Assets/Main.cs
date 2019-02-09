@@ -34,7 +34,7 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _doorMaterial.mainTextureScale = new Vector2(1.0f / TotalTilesInStrip, 1.0f / 1);
+        _doorMaterial.mainTextureScale = new Vector2(1.0f / TotalTilesInStrip, 1.0f);
         StartCoroutine("PlayLoop", 0.10f);
     }
 
@@ -61,7 +61,7 @@ public class Main : MonoBehaviour
             _frameCounter++;
         }
 
-        _doorMaterial.mainTextureOffset = new Vector2(1.0f / TotalTilesInStrip * _frameCounter, 1.0f / 1);
+        _doorMaterial.mainTextureOffset = new Vector2(1.0f / TotalTilesInStrip * _frameCounter, 1.0f);
         
         StopCoroutine("PlayLoop");
     }
