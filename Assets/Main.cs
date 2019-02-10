@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+// shout out to forum where my basic information came from:
+// https://answers.unity.com/questions/45997/texture-animation.html
+//
 public class Main : MonoBehaviour
 {
     private int _frameCounter;
